@@ -161,5 +161,4 @@
             vm.bodyEl.toggleClass('ms-navigation-horizontal-mobile-menu-active');
         }
     }
-
 })();

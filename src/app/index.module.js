@@ -21,6 +21,18 @@
             'app.quick-panel',
 
             // Sample
-            'app.sample'
+            //'app.sample',
+
+            // Cloud Hub Services
+            'app.services',
+
+            // Home Screen
+            'app.home',
+
+            // Shopping Screen
+            'app.shop',
+
+            // Design Screen
+            'app.design'
         ]);
 })();

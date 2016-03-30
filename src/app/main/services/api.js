@@ -1,19 +1,15 @@
-/*
 (function ()
 {
     'use strict';
 
     angular
-        .module('fuse')
-        .provider('api', apiServiceProvider);
+        .module('app.services')
+        .factory('api', apiService);
 
-    /!** @ngInject *!/
-    function apiServiceProvider()
+    /** @ngInject */
+    function apiService($resource)
     {
-        // Inject resource service
-        var $resource = angular.injector(['ngResource']).get('$resource');
-
-        /!**
+        /**
          * You can use this service to define your API urls. The "api" service
          * is designed to work in parallel with "apiResolver" service which you can
          * find in the "app/core/services/api-resolver.service.js" file.
@@ -172,25 +168,13 @@
          *
          *          ...
          *      }
-         *!/
+         */
 
         var api = {};
 
-        // Make api available in config phase
-        this.api = api;
-
         // Base Url
         api.baseUrlFile = 'app/data/';
-        api.cloudHubAPI = {
-            protocol: 'http',
-            host: '127.0.0.1',
-            port: 3000,
-            baseUrl: 'api/v1'
-        };
-        api.baseUrl = api.cloudHubAPI.protocol + '://'
-            + api.cloudHubAPI.host + ':'
-            + api.cloudHubAPI.port + '/'
-            + api.cloudHubAPI.baseUrl;
+        api.baseUrl = 'api/v1/';
 
         // Device Registry API
         api.deviceRegistry = {
@@ -214,6 +198,4 @@
 
         return api;
     }
-
 })();
-*/
