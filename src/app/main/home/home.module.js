@@ -6,7 +6,9 @@
             'app.home.dashboard',
             'app.home.flows',
             'app.home.devices'
-        ]).config(config);
+        ])
+        .config(config)
+        .run(run);
 
     /** @ngInject */
     function config(msNavigationServiceProvider) {
@@ -27,9 +29,65 @@
             state: 'app.home_flows'
         });
 
-        msNavigationServiceProvider.saveItem('home.devices', {
-            title: 'Devices',
-            state: 'app.home_devices'
+        msNavigationServiceProvider.saveItem('home.device', {
+            title: 'Devices'
         });
     }
+
+    /** @ngInject */
+    function run(runtimeState, msNavigationService, deviceManager, $log) {
+        deviceManager.load()
+            .then(function (devices) {
+                if (devices && devices.hasOwnProperty('devices')) {
+                    // Loop through devices array and add menu and state for each item
+                    for (var i = 0; i < devices.devices.length; i++) {
+                        var device = devices.devices[i];
+                        if (validateDevice(device)) {
+                            addDevice(device);
+                        }
+                    }
+                }
+
+                function validateDevice(device) {
+                    return (typeof device !== 'undefined' && device
+                    && device.hasOwnProperty('id')
+                    && device.hasOwnProperty('name')
+                    && device.hasOwnProperty('type')
+                    && device.hasOwnProperty('info'));
+                }
+
+                function addDevice(device) {
+                    var id = device.id;
+                    var parts = id.split('/');
+                    var stateName = 'app.home_' + parts.join('_');
+                    var path = 'home.' + parts.join('.');
+                    var url = '/home-' + parts.join('-');
+
+                    // Add corresponding state for each device
+                    runtimeState.addState(
+                        stateName, {
+                            url: url,
+                            views: {
+                                'content@app': {
+                                    templateUrl: 'app/main/shop/devices/devices.html',
+                                    controller: 'DeviceController as vm'
+                                }
+                            },
+                            resolve: {
+                                DeviceData: function(deviceManager) {
+                                    return deviceManager.get(id);
+                                }
+                            }
+                        });
+
+                    // Add menu item with state
+                    msNavigationService.saveItem(path, {
+                        title: device.name,
+                        state: stateName
+                    });
+                }
+
+            });
+    }
+
 })();

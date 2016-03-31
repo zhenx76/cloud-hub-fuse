@@ -4,15 +4,15 @@
 
     angular
         .module('app.home.devices')
-        .controller('DevicesController', DevicesController);
+        .controller('DeviceController', DeviceController);
 
     /** @ngInject */
-    function DevicesController(RegisteredDevicesData)
+    function DeviceController(DeviceData)
     {
         var vm = this;
 
         // Data
-        vm.helloText = RegisteredDevicesData.data.helloText;
+        vm.helloText = DeviceData;
 
         // Methods
 

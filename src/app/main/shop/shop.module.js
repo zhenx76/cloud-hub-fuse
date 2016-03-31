@@ -27,8 +27,6 @@
     function run(runtimeState, msNavigationService, deviceRegistry, $log) {
         deviceRegistry.load()
             .then(function(deviceModels) {
-                $log.info(deviceModels);
-
                 // Loop through device registry tree and add menu items.
                 // Menu items should be only added once therefore we do it in the run block instead of controller
                 addDeviceModel(deviceModels, 'shop');

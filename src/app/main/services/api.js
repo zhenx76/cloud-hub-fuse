@@ -182,6 +182,12 @@
             getByType: $resource(api.baseUrl + 'registry/device/:type', {type: '@type'})
         };
 
+        // Device Manager API
+        api.deviceManager = {
+            list: $resource(api.baseUrl + 'devices'),
+            getById: $resource(api.baseUrl + 'device/:id', {id: '@id'})
+        };
+
         api.dashboard = $resource(api.baseUrlFile + 'dashboard/dashboard.json');
         api.Flows = $resource(api.baseUrlFile + 'flows/allFlows.json');
         api.RegisteredFlows = $resource(api.baseUrlFile + 'flows/registeredFlows.json');
