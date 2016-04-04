@@ -43,6 +43,12 @@
                     for (var i = 0; i < devices.devices.length; i++) {
                         var device = devices.devices[i];
                         if (validateDevice(device)) {
+                            if (device.hasOwnProperty('gateway') && device.gateway.type == 'cloud') {
+                                // Skip pure cloud service. Usually they are back-end of smart devices (i.e., Nest)
+                                // and should not be visible to end users
+                                continue;
+                            }
+
                             addDevice(device);
                         }
                     }
