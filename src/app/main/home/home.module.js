@@ -62,6 +62,9 @@
                     var stateName = 'app.home_' + parts.join('_');
                     var path = 'home.' + parts.join('.');
                     var url = '/home-' + parts.join('-');
+                    var type = device.type.split('/').slice(1).join('-');
+                    var templateUrl = 'app/main/home/devices/' + type + '.html';
+                    var controller = type + ' as vm';
 
                     // Add corresponding state for each device
                     runtimeState.addState(
@@ -69,8 +72,8 @@
                             url: url,
                             views: {
                                 'content@app': {
-                                    templateUrl: 'app/main/shop/devices/devices.html',
-                                    controller: 'DeviceController as vm'
+                                    templateUrl: templateUrl,
+                                    controller: controller
                                 }
                             },
                             resolve: {

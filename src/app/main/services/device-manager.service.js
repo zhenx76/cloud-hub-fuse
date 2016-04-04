@@ -18,7 +18,6 @@
                 devices = DeviceManager.get(
                     // Success
                     function (response) {
-                        $log.info(response);
                         resolve(response);
                     },
 

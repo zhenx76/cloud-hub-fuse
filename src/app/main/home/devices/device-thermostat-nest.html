@@ -1,0 +1,91 @@
+<div id="device-thermostat-nest" class="page-layout simple doc-page chart-doc-page" layout="row">
+
+    <!-- CENTER -->
+    <div class="center" flex ms-scroll>
+
+        <!-- HEADER -->
+        <div class="header md-accent-bg" layout="column" layout-align="space-between">
+            <div layout="column" layout-align="center start">
+                <div class="breadcrumb" layout="row" layout-align="start center">
+                    <md-icon md-font-icon="icon-home" class="s16"></md-icon>
+                    <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
+                    <span class="parent">Devices</span>
+                    <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
+                    <span class="parent">Thermostat</span>
+                </div>
+                <div class="md-display-1 font-weight-160">Nest</div>
+            </div>
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT -->
+        <div class="content">
+
+            <!-- WIDGET GROUP -->
+            <div class="widget-group" layout="row" flex="100" layout-wrap>
+
+                <ms-widget layout="column" flex="100" flex-gt-sm="50">
+
+                    <!-- Front -->
+                    <ms-widget-front class="white-bg">
+
+                        <div class="ph-16 border-bottom" layout="row" layout-align="space-between center">
+                            <div class="h3">{{vm.title}}</div>
+                            <div class="pv-16">
+                                <md-select class="simplified" ng-model="vm.currentTemperatureUnit"
+                                           ng-change="vm.changeTemperatureUnit(vm.currentTemperatureUnit)"
+                                           aria-label="Change temperature unit">
+                                    <md-option ng-repeat="(key, unit) in vm.temperatureUnits"
+                                               value="{{key}}">
+                                        {{key}}
+                                    </md-option>
+                                </md-select>
+                            </div>
+                        </div>
+
+                        <div class="p-16">
+                            <chartist class="ct-chart ct-golden-section"
+                                      chartist-data="vm.donutChart.data"
+                                      chartist-chart-type="Pie"
+                                      chartist-chart-options="vm.donutChart.options"
+                                      chartist-events="vm.donutChart.events">
+                            </chartist>
+                        </div>
+
+                        <div class="p-16">
+                            <md-slider flex md-discrete
+                                       ng-model="vm.goalTemperature"
+                                       step="1" min="1" max="{{vm.getMaxTemperature()}}"
+                                       aria-label="Temperature">
+                            </md-slider>
+                        </div>
+
+                        <div class="pv-8 mh-16 border-top" layout="row" layout-align="start center" layout-wrap>
+                            <div class="pv-8 border-right" layout="column" layout-align="center center"
+                                 flex="100" flex-gt-xs="50">
+                                <span class="font-size-16">{{vm.getGoalTemperature()}}</span>
+                                <span class="h4">Goal Temperature</span>
+                            </div>
+
+                            <div class="pv-8" layout="column" layout-align="center center" flex="100"
+                                 flex-gt-xs="50">
+                                <span class="font-size-16">{{vm.getHumidity()}}</span>
+                                <span class="h4">Humidity</span>
+                            </div>
+                        </div>
+
+                    </ms-widget-front>
+                    <!-- / Front -->
+
+                </ms-widget>
+
+            </div>
+            <!-- / WIDGET GROUP -->
+
+        </div>
+        <!-- / CONTENT -->
+
+    </div>
+    <!-- / CENTER -->
+
+</div>

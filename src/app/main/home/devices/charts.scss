@@ -1,0 +1,32 @@
+.chart-doc-page {
+
+    .content {
+        max-width: 800px;
+        .c3 {
+            > svg {
+                min-height: 300px;
+            }
+        }
+        .ct-chart {
+            .ct-temp-cooling {
+                stroke: #00CDCD;
+                stroke-width: 5px !important;
+            }
+            .ct-temp-warming {
+                stroke: #FF8040;
+                stroke-width: 5px !important;
+            }
+            .ct-temp-neutral {
+                stroke: #B6B6B4;
+                stroke-width: 5px !important;
+            }
+            .ct-label {
+                text-anchor: middle;
+                alignment-baseline: middle;
+                font-size: 16px;
+                fill: black;
+            }
+        }
+    }
+
+}
